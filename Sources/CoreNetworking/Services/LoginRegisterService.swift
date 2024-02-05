@@ -11,7 +11,8 @@ import CodeClanCore
 
 public enum AuthService: URLRequestConvertible {
     case sendFcmToken(deviceType:Int = 1 /*ios = 1*/,firebaseToken:String,model:String)
-    case register(email : String, password : String, userType : Int)
+    case register(Email:String,FirstName:String,LastName:String,Password:String,Phone:String,Role:String,WayToKnow:String)
+
     case verificaionEmail(callbackUrl:String)
     case login(email : String, password : String)
     case resetPassword(email : String)
@@ -20,14 +21,14 @@ public enum AuthService: URLRequestConvertible {
         
         switch self {
             
-        case .register: return .baseURL / .authentication / .LoginWithEmailandPassword
+        case .register: return .baseURL / .authentication / .register
         case .login: return .baseURL / .authentication / .LoginWithEmailandPassword
         case .resetPassword: return .baseURL
             
-        case .verificaionEmail(callbackUrl: let callbackUrl):
-            <#code#>
-        case .sendFcmToken(deviceType: let deviceType, firebaseToken: let firebaseToken, model: let model):
-            <#code#>
+        case .verificaionEmail:
+            return .baseURL / .SendVerificationEmail
+        case .sendFcmToken:
+            return .baseURL / .SendUserDevice
         }
     }
     
@@ -72,8 +73,10 @@ public enum AuthService: URLRequestConvertible {
         case .resetPassword(email: let email):
             return ["Email" : email]
             
-        case .register(email: let email, password : let password, userType : let userType):
-            return ["Email" : email , "Password" : password, "userType" : userType]
+        
+        case .register(Email: let email, FirstName: let firstName, LastName: let lastName, Password: let Password, Phone: let phone, Role: let role, WayToKnow: let wayToKnow):
+            
+        return ["Email":email,"FirstName":firstName,"LastName":lastName,"Password":Password,"Phone":phone,"Role":role,"WayToKnow":wayToKnow]
             
         case .verificaionEmail(callbackUrl: let callbackUrl):
             return ["CallbackUrl" : callbackUrl]
