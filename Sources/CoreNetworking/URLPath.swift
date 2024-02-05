@@ -73,6 +73,9 @@ struct URLPath: Equatable {
     static let x64 = URLPath("64x64")
     static let x32 = URLPath("32x32")
     static let LoginWithEmailandPassword = URLPath("LoginWithEmailandPassword")
+    static let SendUserDevice = URLPath("SendUserDevice")
+    static let register = URLPath("register")
+    static let SendVerificationEmail = URLPath("SendVerificationEmail")
     static let authentication = URLPath("authentication")
 
     

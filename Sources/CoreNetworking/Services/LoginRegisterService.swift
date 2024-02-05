@@ -10,8 +10,9 @@ import Alamofire
 import CodeClanCore
 
 public enum AuthService: URLRequestConvertible {
-    
+    case sendFcmToken(deviceType:Int = 1 /*ios = 1*/,firebaseToken:String,model:String)
     case register(email : String, password : String, userType : Int)
+    case verificaionEmail(callbackUrl:String)
     case login(email : String, password : String)
     case resetPassword(email : String)
     
@@ -23,6 +24,10 @@ public enum AuthService: URLRequestConvertible {
         case .login: return .baseURL / .authentication / .LoginWithEmailandPassword
         case .resetPassword: return .baseURL
             
+        case .verificaionEmail(callbackUrl: let callbackUrl):
+            <#code#>
+        case .sendFcmToken(deviceType: let deviceType, firebaseToken: let firebaseToken, model: let model):
+            <#code#>
         }
     }
     
@@ -39,14 +44,21 @@ public enum AuthService: URLRequestConvertible {
             return .post
         case .resetPassword:
             return .post
+        case .verificaionEmail:
+            return .post
+        case .sendFcmToken:
+            return .post
         }
     }
     
     var headers:  [String : String] {
-        let customHeaders = [
-            "Content-Type": "application/json",
-        ]
-        return customHeaders
+        switch self {
+            
+        case .verificaionEmail,.sendFcmToken:
+            return ["Content-Type": "application/json","Authorization": "Bearer \(Tokens.accessToken ?? "")"]
+        default: return ["Content-Type": "application/json"]
+        }
+        
     }
     
     
@@ -63,6 +75,10 @@ public enum AuthService: URLRequestConvertible {
         case .register(email: let email, password : let password, userType : let userType):
             return ["Email" : email , "Password" : password, "userType" : userType]
             
+        case .verificaionEmail(callbackUrl: let callbackUrl):
+            return ["CallbackUrl" : callbackUrl]
+        case .sendFcmToken(deviceType: let deviceType, firebaseToken: let firebaseToken, model: let model):
+            return ["DeviceType" : deviceType , "FirebaseToken" : firebaseToken, "Model" : model]
         }
     }
     public func asURLRequest() throws -> URLRequest {

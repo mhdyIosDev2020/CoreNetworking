@@ -15,7 +15,7 @@ let package = Package(
             targets: ["CoreNetworking"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mhdyIosDev2020/CodeClanCore", branch:"main"),
+        .package(url: "https://github.com/mhdyIosDev2020/CodeClanCore.git", branch:"main"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.8.1"))
     ],
     targets: [

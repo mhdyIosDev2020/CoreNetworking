@@ -12,10 +12,10 @@
     {
       "identity" : "codeclancore",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mhdyIosDev2020/CodeClanCore",
+      "location" : "https://github.com/mhdyIosDev2020/CodeClanCore.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c3a0e588a905b2891cfccd4ec6bfce86bdae2c79"
+        "revision" : "69f78087bd88247dab0e547447af886a64aaac91"
       }
     },
     {
